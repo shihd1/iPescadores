@@ -20,3 +20,8 @@ Before uploading the photo:
 
 After uploading the photo:
 ![alt text](https://github.com/shihd1/iPescadores/blob/master/ImageFolder/HexagonAfter.PNG?raw=true)
+
+### Aspirations/Vision
+Use of state-of-art technique: Mask-RCNN
+New research on creating planes from a single image: https://single-view-mpi.github.io/ 
+I plan to try a combination of Mask R-CNN (which would recognize trash and apply masks) and multiplane images (to predict the depth) to create a rough estimate on the amount of trash.
