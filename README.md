@@ -13,3 +13,10 @@ I had to find a way for users’ game information to be uploaded to a server. I 
 It realized the interactive communication between users’ device and server. 
 The NOSQL Database (MongoDB) has flexible schema and document based structure making it easy to organize the data and handle schema changes in requirements. 
 I choose MongoDB as my database.
+
+### Display
+Before uploading the photo:
+![alt text](https://github.com/shihd1/iPescadores/blob/master/ImageFolder/HexagonBefore.PNG?raw=true)
+
+After uploading the photo:
+![alt text](https://github.com/shihd1/iPescadores/blob/master/ImageFolder/HexagonAfter.PNG?raw=true)
