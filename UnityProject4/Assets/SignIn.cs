@@ -25,7 +25,7 @@ public class SignIn : MonoBehaviour
     }
     public void signIn()
     {
-        bool value = serverService.signIn(username.text,password.text);
+        bool value = ServerService.signIn(username.text,password.text);
         if(value == true)
         {
             info.text = "Login is successful!";

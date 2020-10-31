@@ -4,7 +4,7 @@ using System.Net;
 using System.Text;
 using UnityEngine;
 
-public class serverService : MonoBehaviour
+public class ServerService : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -108,6 +108,26 @@ public class serverService : MonoBehaviour
             Debug.Log("ERROR --> cannot determine if username exist");
             return -1;
         }
+    }
+    public static bool sendFriendRequest(string id, string friendID)
+    {
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/sendfriendrequest/" + id + "/" + friendID);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        UserInfo info = JsonUtility.FromJson<UserInfo>(jsonResponse);
+        return info.status.Equals("success");
+    }
+    public static string getID(string username)
+    {
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/getID/" + username);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        UserInfo info = JsonUtility.FromJson<UserInfo>(jsonResponse);
+        return info.id;
     }
 }
 

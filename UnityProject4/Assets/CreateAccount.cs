@@ -37,7 +37,7 @@ public class CreateAccount : MonoBehaviour
         }
         else
         {
-            string value = serverService.usernameExist(username.text);
+            string value = ServerService.usernameExist(username.text);
             if (value.Equals("True"))
             {
                 info.text = "Username is not valid!";
@@ -45,7 +45,7 @@ public class CreateAccount : MonoBehaviour
             }
             else if (value.Equals("False"))
             {
-                string val = serverService.createUser(username.text, firstName.text, lastName.text, password.text);
+                string val = ServerService.createUser(username.text, firstName.text, lastName.text, password.text);
                 if (!val.Equals("ERROR"))
                 {
                     info.text = "Account Created!";
