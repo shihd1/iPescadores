@@ -45,6 +45,40 @@ async function run() {
         //await client.close();
     }
 }
+
+//General
+async function getLevel(InputID) {
+    try {
+        await client.connect();
+
+        const database = client.db("PenghuProject");
+        const collection = database.collection("UserInfo");
+        console.log(InputID);
+        const query = { 'id': 1604026294571 };
+        const options = { upsert: false };
+
+        var result = await collection.findOne(query, options);
+    } finally {
+        return [result];
+    }
+}
+async function getID(username) {
+    try {
+        await client.connect();
+
+        const database = client.db("PenghuProject");
+        const collection = database.collection("UserInfo");
+
+        const query = { username: username };
+        const options = { upsert: false };
+
+        var result = await collection.findOne(query, options);
+    } finally {
+        return result;
+    }
+}
+
+//Create Account
 async function checkUser(username) {
     var result;
     try {
@@ -70,14 +104,16 @@ async function addUser(id, username, firstname, lastname, password) {
         const collection = database.collection("UserInfo");
 
         // create a document to be inserted
-        const doc = { id: id, username: username, firstname: firstname, lastname: lastname, password: password, friendList: [],level: 1 };
+        const doc = { id: id, username: username, firstname: firstname, lastname: lastname, password: password, friendList: [], friendRequest: [], level: 1 };
 
         const result = await collection.insertOne(doc);
     } finally {
         //await client.close();
     }
 }
-async function signin(username, password) {
+
+//Sign In
+async function signIn(username, password) {
     var end;
     try {
         await client.connect();
@@ -94,28 +130,53 @@ async function signin(username, password) {
         return [end, result];
     }
 }
-async function addfriend(userID, friendID) {
+
+//Friends
+async function sendFriendRequest(userID, friendID) {
     try {
         await client.connect();
 
         const database = client.db("PenghuProject");
         const collection = database.collection("UserInfo");
-
-        const filter = { id: userID };
+        const filter = { id: parseInt(friendID) };
         const options = { upsert: false };
+
+        var result = await collection.findOne(filter, options);
+        result.friendRequest.push(userID);
         const updateDoc = {
-            $push: {
-                friendList: friendID
+            $set: {
+                friendRequest: result.friendRequest
             }
         };
         var result = await collection.updateOne(filter, updateDoc, options);
-        console.log(result.modifiedCount());
-        end = result.modifiedCount() == 0;
+        end = result.modifiedCount == 1;
     } finally {
         return end;
     }
 }
-async function loadfriend(id) {
+async function addFriend(userID, friendID) {
+    try {
+        await client.connect();
+
+        const database = client.db("PenghuProject");
+        const collection = database.collection("UserInfo");
+        const filter = { id: parseInt(userID) };
+        const options = { upsert: false };
+
+        var result = await collection.findOne(filter, options);
+        result.friendList.push(friendID);
+        const updateDoc = {
+            $set: {
+                friendList: result.friendList
+            }
+        };
+        var result = await collection.updateOne(filter, updateDoc, options);
+        end = result.modifiedCount == 1;
+    } finally {
+        return end;
+    }
+}
+async function loadFriend(id) {
     var end;
     try {
         await client.connect();
@@ -132,22 +193,18 @@ async function loadfriend(id) {
         return [end, result];
     }
 }
-async function getLevel(id) {
-    try {
-        await client.connect();
 
-        const database = client.db("PenghuProject");
-        const collection = database.collection("UserInfo");
 
-        const query = { id: id };
-        const options = { upsert: false };
-
-        var result = await collection.findOne(query, options);
-    } finally {
-        return [result];
-    }
-}
-
+app.get('/getLevel/:id', (req, res) => {
+    var id = req.params.id;
+    getLevel(id)
+        .then((r) => {
+            res.send({ 'status': 'success', level: r[0].level });
+        })
+        .catch(() => {
+            res.send({ 'status': 'fail' });
+        })
+})
 app.get('/userexist/:username', (req, res) => {
     var username = req.params.username;
     checkUser(username)
@@ -180,7 +237,7 @@ app.get('/useradd/:username/:firstname/:lastname/:password', (req, res) => {
 app.get('/signin/:username/:password', (req, res) => {
     var username = req.params.username;
     var password = req.params.password;
-    signin(username, password)
+    signIn(username, password)
         .then((r) => {
             //console.log("------------------------------")
             if (r[0] == true) {
@@ -196,10 +253,25 @@ app.get('/signin/:username/:password', (req, res) => {
             res.send({ 'status': 'fail' });
         });
 });
+app.get('/sendfriendrequest/:userID/:friendID', (req, res) => {
+    var userID = req.params.userID;
+    var friendID = req.params.friendID;
+    sendFriendRequest(userID, friendID)
+        .then((r) => {
+            if (r == true) {
+                res.send({ 'status': 'success' });
+            } else {
+                res.send({ 'status': 'fail' });
+            }
+        })
+        .catch(() => {
+            res.send({ 'status': 'fail' });
+        })
+})
 app.get('/addfriend/:userID/:friendID', (req, res) => {
     var userID = req.params.userID;
     var friendID = req.params.friendID;
-    addfriend(userID, friendID)
+    addFriend(userID, friendID)
         .then((r) => {
             if (r == true) {
                 res.send({ 'status': 'success' });
@@ -213,7 +285,7 @@ app.get('/addfriend/:userID/:friendID', (req, res) => {
 });
 app.get('/loadfriend/:id', (req, res) => {
     var id = req.params.id;
-    loadfriend(id)
+    loadFriend(id)
         .then((r) => {
             if (r[0] == true) {
                 res.send({ 'status': 'success', friends: r[1].friendID });
@@ -225,16 +297,24 @@ app.get('/loadfriend/:id', (req, res) => {
             res.send({ 'status': 'fail' });
         })
 });
-app.get('/getLevel/:id', (req, res) => {
-    var id = req.params.id;
-    getLevel(id)
+app.get('/getID/:username', (req, res) => {
+    var username = req.params.username;
+    getID(username)
         .then((r) => {
-            res.send({ 'status': 'success', id: r.level});
+            //console.log("------------------------------")
+            if (r != null) {
+                //console.log("------------------------------A");
+                res.send({ 'status': 'success', id: r.id });
+            } else {
+                //console.log("------------------------------B");
+                res.send({ 'status': 'fail' });
+            }
         })
         .catch(() => {
+            //console.log("------------------------------C");
             res.send({ 'status': 'fail' });
-        })
-})
+        });
+});
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
