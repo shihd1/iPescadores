@@ -63,15 +63,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Asset Store\PolygonObjects\Polygonal Foliage Asset Package\Scripts\Utility\FlyCameraBehaviour.cs" />
     <Compile Include="Assets\CreateAccount.cs" />
     <Compile Include="Assets\Data.cs" />
     <Compile Include="Assets\FriendManager.cs" />
-    <Compile Include="Assets\PolygonObjects\Polygonal Foliage Asset Package\Scripts\Utility\FlyCameraBehaviour.cs" />
+    <Compile Include="Assets\FriendRequestContentManager.cs" />
     <Compile Include="Assets\ServerService.cs" />
     <Compile Include="Assets\SignIn.cs" />
-    <None Include="Assets\PolygonObjects\Polygonal Foliage Asset Package\Shaders\Cloud.shader" />
-    <None Include="Assets\PolygonObjects\Polygonal Foliage Asset Package\Shaders\Diffuse.shader" />
-    <None Include="Assets\Sky\Stylized Sky\Shaders\Stylized Sky.shader" />
+    <None Include="Assets\Asset Store\PolygonObjects\Polygonal Foliage Asset Package\Shaders\Cloud.shader" />
+    <None Include="Assets\Asset Store\PolygonObjects\Polygonal Foliage Asset Package\Shaders\Diffuse.shader" />
+    <None Include="Assets\Asset Store\Sky\Stylized Sky\Shaders\Stylized Sky.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

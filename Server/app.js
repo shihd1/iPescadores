@@ -242,7 +242,7 @@ app.get('/signin/:username/:password', (req, res) => {
             //console.log("------------------------------")
             if (r[0] == true) {
                 //console.log("------------------------------A");
-                res.send({ 'status': 'success', id: r[1].id });
+                res.send({ 'status': 'success', id: r[1].id, level: r[1].level, friendRequest: r[1].friendRequest, friendList: r[1].friendList });
             } else {
                 //console.log("------------------------------B");
                 res.send({ 'status': 'fail' });

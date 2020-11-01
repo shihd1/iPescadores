@@ -32,7 +32,7 @@ public class ServerService : MonoBehaviour
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
         Debug.Log(jsonResponse);
-        UserInfo info = JsonUtility.FromJson<UserInfo>(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
         if (info.status.Equals("success"))
         {
             return ""+info.exist;
@@ -55,7 +55,7 @@ public class ServerService : MonoBehaviour
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
         Debug.Log(jsonResponse);
-        UserInfo info = JsonUtility.FromJson<UserInfo>(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
         if (info.status.Equals("success"))
         {
             Debug.Log(info.id);
@@ -79,11 +79,13 @@ public class ServerService : MonoBehaviour
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
         Debug.Log(jsonResponse);
-        UserInfo info = JsonUtility.FromJson<UserInfo>(jsonResponse);
-        if (info.status.Equals("success"))
+        Output o = JsonUtility.FromJson<Output>(jsonResponse);
+        if (o.status.Equals("success"))
         {
-            Debug.Log(info.id);
-            GameObject.Find("Local Data").GetComponent<Data>().id = info.id;
+            GameObject.Find("Local Data").GetComponent<Data>().id = o.id;
+            GameObject.Find("Local Data").GetComponent<Data>().level = o.level;
+            GameObject.Find("Local Data").GetComponent<Data>().friendID = o.friendList;
+            GameObject.Find("Local Data").GetComponent<Data>().friendRequestID = o.friendRequest;
             return true;
         }
         else
@@ -98,7 +100,7 @@ public class ServerService : MonoBehaviour
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
         Debug.Log(jsonResponse);
-        UserInfo info = JsonUtility.FromJson<UserInfo>(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
         if (info.status.Equals("success"))
         {
             return info.level;
@@ -116,7 +118,7 @@ public class ServerService : MonoBehaviour
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
         Debug.Log(jsonResponse);
-        UserInfo info = JsonUtility.FromJson<UserInfo>(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
         return info.status.Equals("success");
     }
     public static string getID(string username)
@@ -126,17 +128,20 @@ public class ServerService : MonoBehaviour
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
         Debug.Log(jsonResponse);
-        UserInfo info = JsonUtility.FromJson<UserInfo>(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
         return info.id;
     }
 }
 
 [System.Serializable]
-public class UserInfo
+public class Output
 {
     public string status;
 
     public string id;
     public bool exist;
     public int level;
+
+    public string[] friendRequest;
+    public string[] friendList;
 }
