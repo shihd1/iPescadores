@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class FriendManager : MonoBehaviour
 {
@@ -36,22 +37,28 @@ public class FriendManager : MonoBehaviour
         //Debug.Log(level);
         Instantiate(hex[level], x, Quaternion.identity);
     }
-    public void sendRequest(string username)
+    public void sendRequest(Text username)
     {
         string id = localData.GetComponent<Data>().id;
-        string friendID = ServerService.getID(username);
+        string friendID = ServerService.getID(username.text);
         if(friendID==null)
         {
-
-        }
-        bool success = ServerService.sendFriendRequest(id, friendID);
-        if (success)
-        {
-
+            //Display: can't find user
+            Debug.Log("Can't find user");
         }
         else
         {
-
+            bool success = ServerService.sendFriendRequest(id, friendID);
+            if (success)
+            {
+                //Display: sent friend request
+                Debug.Log("Success! Sent friend request");
+            }
+            else
+            {
+                //Display: fail to send
+                Debug.Log("Fail to send");
+            }
         }
     }
 }
