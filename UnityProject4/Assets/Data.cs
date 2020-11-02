@@ -18,6 +18,6 @@ public class Data : MonoBehaviour
 }
 public class point
 {
-    public int x;
-    public int z;
+    public float x;
+    public float z;
 }

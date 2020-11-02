@@ -19,13 +19,17 @@ public class FriendManager : MonoBehaviour
         for (int i = 0; i < friendID.Length; i++)
         {
             string fid = friendID[i];
-            int x = friendLocations[i].x;
-            int z = friendLocations[i].z;
+            float x = friendLocations[i].x;
+            float z = friendLocations[i].z;
             int level = ServerService.getLevel(fid);
             showFriend(level, new Vector3(x, 0, z));
         }
-        //showFriend(serverService.getLevel(1604026294571+""), new Vector3(-19.03f, 0, 9));
-
+        showFriend(1, new Vector3(-19.03f, 0f, 9f));
+        showFriend(1, new Vector3(-19.03f, 0f, -9f));
+        showFriend(1, new Vector3(-1.732f, 0f, -20.997f));
+        showFriend(1, new Vector3(-1.732f, 0f, 20.997f));
+        showFriend(1, new Vector3(19.03f, 0f, 9f));
+        showFriend(1, new Vector3(19.03f, 0f, -9f));
     }
 
     // Update is called once per frame

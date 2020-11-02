@@ -158,7 +158,9 @@ async function sendFriendRequest(userID, friendID) {
         const options = { upsert: false };
 
         var result = await collection.findOne(filter, options);
-        result.friendRequest.push(userID);
+        if (result.friendRequest.indexOf(userID) == -1 && result.friendList.indexOf(userID) == -1) {
+            result.friendRequest.push(userID);
+        }
         const updateDoc = {
             $set: {
                 friendRequest: result.friendRequest
