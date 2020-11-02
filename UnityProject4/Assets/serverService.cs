@@ -131,6 +131,38 @@ public class ServerService : MonoBehaviour
         Output info = JsonUtility.FromJson<Output>(jsonResponse);
         return info.id;
     }
+    public static string getUsername(string id)
+    {
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/getusername/" + id);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
+        return info.username;
+    }
+    public static bool addFriend(string id, string friendID)
+    {
+        Debug.Log(id + "   " + friendID);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/addFriend/" + id + "/" + friendID);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
+        return info.status.Equals("success");
+    }
+    public static bool removeFriendRequest(string id, string friendID)
+    {
+        Debug.Log(id + "   " + friendID);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/removefriendrequest/" + id + "/" + friendID);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
+        return info.status.Equals("success");
+    }
 }
 
 [System.Serializable]
@@ -139,6 +171,7 @@ public class Output
     public string status;
 
     public string id;
+    public string username;
     public bool exist;
     public int level;
 

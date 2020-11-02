@@ -25,7 +25,7 @@ public class FriendRequestContentManager : MonoBehaviour
         for (int i = 0; i < friendsID.Length; i++)
         {
             GameObject g = Instantiate(friendRequest, transform);
-            g.GetComponentInChildren<Text>().text = friendsID[i];
+            g.GetComponentInChildren<Text>().text = ServerService.getUsername(friendsID[i]);
         }
     }
 }

@@ -64,6 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Asset Store\PolygonObjects\Polygonal Foliage Asset Package\Scripts\Utility\FlyCameraBehaviour.cs" />
+    <Compile Include="Assets\ButtonConfirmFriendRequest.cs" />
+    <Compile Include="Assets\ButtonRejectFriendRequest.cs" />
     <Compile Include="Assets\CreateAccount.cs" />
     <Compile Include="Assets\Data.cs" />
     <Compile Include="Assets\FriendManager.cs" />
