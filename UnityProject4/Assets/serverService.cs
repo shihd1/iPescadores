@@ -86,6 +86,7 @@ public class ServerService : MonoBehaviour
             GameObject.Find("Local Data").GetComponent<Data>().level = o.level;
             GameObject.Find("Local Data").GetComponent<Data>().friendID = o.friendList;
             GameObject.Find("Local Data").GetComponent<Data>().friendRequestID = o.friendRequest;
+            GameObject.Find("Manager").GetComponent<FriendManager>().showAllFriends();
             return true;
         }
         else

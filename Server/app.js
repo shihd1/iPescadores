@@ -54,7 +54,7 @@ async function getLevel(InputID) {
         const database = client.db("PenghuProject");
         const collection = database.collection("UserInfo");
         console.log(InputID);
-        const query = { 'id': 1604026294571 };
+        const query = { 'id': parseInt(InputID)};
         const options = { upsert: false };
 
         var result = await collection.findOne(query, options);
