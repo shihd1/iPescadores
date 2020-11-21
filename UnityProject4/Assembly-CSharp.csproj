@@ -72,6 +72,7 @@
     <Compile Include="Assets\Data.cs" />
     <Compile Include="Assets\FriendManager.cs" />
     <Compile Include="Assets\FriendRequestContentManager.cs" />
+    <Compile Include="Assets\ProgressBar.cs" />
     <Compile Include="Assets\ServerService.cs" />
     <Compile Include="Assets\SignIn.cs" />
     <None Include="Assets\Asset Store\PolygonObjects\Polygonal Foliage Asset Package\Shaders\Cloud.shader" />
