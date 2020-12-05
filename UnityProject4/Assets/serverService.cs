@@ -84,9 +84,15 @@ public class ServerService : MonoBehaviour
         {
             GameObject.Find("Local Data").GetComponent<Data>().id = o.id;
             GameObject.Find("Local Data").GetComponent<Data>().level = o.level;
+            GameObject.Find("Local Data").GetComponent<Data>().coins = o.coins;
             GameObject.Find("Local Data").GetComponent<Data>().friendID = o.friendList;
             GameObject.Find("Local Data").GetComponent<Data>().friendRequestID = o.friendRequest;
             GameObject.Find("Manager").GetComponent<FriendManager>().showAllFriends();
+            GameObject.Find("Canvas")
+                .transform.Find("Main Page")
+                .transform.Find("Horizontal Panel")
+                .transform.Find("Text (TMP)")
+                .GetComponent<CoinPanel>().updateCoinCount();
             return true;
         }
         else
@@ -173,6 +179,7 @@ public class Output
 
     public string id;
     public string username;
+    public int coins;
     public bool exist;
     public int level;
 

@@ -54,7 +54,7 @@ async function getLevel(InputID) {
         const database = client.db("PenghuProject");
         const collection = database.collection("UserInfo");
         console.log(InputID);
-        const query = { 'id': parseInt(InputID)};
+        const query = { 'id': parseInt(InputID) };
         const options = { upsert: false };
 
         var result = await collection.findOne(query, options);
@@ -120,7 +120,7 @@ async function addUser(id, username, firstname, lastname, password) {
         const collection = database.collection("UserInfo");
 
         // create a document to be inserted
-        const doc = { id: id, username: username, firstname: firstname, lastname: lastname, password: password, friendList: [], friendRequest: [], level: 1 };
+        const doc = { id: id, username: username, firstname: firstname, lastname: lastname, password: password, friendList: [], friendRequest: [], level: 1, coins: 0};
 
         const result = await collection.insertOne(doc);
     } finally {
@@ -286,7 +286,7 @@ app.get('/signin/:username/:password', (req, res) => {
             //console.log("------------------------------")
             if (r[0] == true) {
                 //console.log("------------------------------A");
-                res.send({ 'status': 'success', id: r[1].id, level: r[1].level, friendRequest: r[1].friendRequest, friendList: r[1].friendList });
+                res.send({ 'status': 'success', id: r[1].id, level: r[1].level, coins: r[1].coins, friendRequest: r[1].friendRequest, friendList: r[1].friendList });
             } else {
                 //console.log("------------------------------B");
                 res.send({ 'status': 'fail' });

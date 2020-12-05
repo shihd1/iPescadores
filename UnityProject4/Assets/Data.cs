@@ -7,6 +7,7 @@ public class Data : MonoBehaviour
     //Player info
     public string id;
     public int level;
+    public int coins;
 
     //Friend info
     public string[] friendID;
