@@ -21,10 +21,30 @@ public class Data : MonoBehaviour
 
     void Start()
     {
-        SaveData.current.profile = new PlayerProfile();
-        SerializationManager.Save("playerProgress", SaveData.current.profile);
-        SaveData.current.profile = (PlayerProfile)SerializationManager.Load(Application.persistentDataPath + "/saves/" + "playerProgress" + ".save");
-        Debug.Log(Application.persistentDataPath+"/saves/");
+        //SaveData.current.profile = new PlayerProfile();
+        //SerializationManager.Save("playerProgress", SaveData.current.profile);
+        //SaveData.current.profile = (PlayerProfile)SerializationManager.Load(Application.persistentDataPath + "/saves/" + "playerProgress" + ".save");
+        //Debug.Log(Application.persistentDataPath+"/saves/");
+    }
+    public void analyzeData()
+    {
+        
+        for(int i = 0; i < achievementStatus.Length; i++)
+        {
+            if (achievementStatus[i])
+            {
+                GameObject.Find("Canvas")
+                    .transform.Find("Achievements")
+                    .transform.Find("Scroll View")
+                    .transform.Find("Viewport")
+                    .transform.Find("Content")
+                    .GetChild(i)
+                    .transform.Find("Image_after")
+                    .gameObject.SetActive(true);
+            }
+        }
+        
+        //Add some way to instantiate the animals and plants.
     }
 }
 public class Point

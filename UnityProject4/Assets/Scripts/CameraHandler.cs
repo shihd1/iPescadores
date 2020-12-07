@@ -111,7 +111,7 @@ public class CameraHandler : MonoBehaviour
         Vector3 move = new Vector3(offset.x * PanSpeed, 0, offset.y * PanSpeed);
 
         // Perform the movement
-        transform.Translate(move, Space.World);
+        transform.Translate(-move, Space.World);
 
         // Ensure the camera remains within bounds.
         Vector3 pos = transform.position;

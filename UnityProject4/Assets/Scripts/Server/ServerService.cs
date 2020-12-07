@@ -91,11 +91,14 @@ public class ServerService : MonoBehaviour
             GameObject.Find("Local Data").GetComponent<Data>().achievementStatus = o.achievementStatus;
             GameObject.Find("Local Data").GetComponent<Data>().numLife = o.numLife;
             GameObject.Find("Manager").GetComponent<FriendManager>().showAllFriends();
+
+            GameObject.Find("Local Data").GetComponent<Data>().analyzeData();
             GameObject.Find("Canvas")
                 .transform.Find("Main Page")
                 .transform.Find("Horizontal Panel")
                 .transform.Find("Text (TMP)")
                 .GetComponent<CoinPanel>().updateCoinCount();
+            
             return true;
         }
         else

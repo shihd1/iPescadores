@@ -120,7 +120,17 @@ async function addUser(id, username, firstname, lastname, password) {
         const collection = database.collection("UserInfo");
 
         // create a document to be inserted
-        const doc = { id: id, username: username, firstname: firstname, lastname: lastname, password: password, friendList: [], friendRequest: [], level: 1, coins: 0};
+        const doc = {
+            username: username, firstname: firstname, lastname: lastname, password: password,
+            id: id,
+            level: 1,
+            coins: 0,
+            totalXP: 0,
+            friendList: [],
+            friendRequest: [],
+            achievementStatus: [true, false, false],
+            numLife: [],
+        };
 
         const result = await collection.insertOne(doc);
     } finally {
@@ -286,7 +296,17 @@ app.get('/signin/:username/:password', (req, res) => {
             //console.log("------------------------------")
             if (r[0] == true) {
                 //console.log("------------------------------A");
-                res.send({ 'status': 'success', id: r[1].id, level: r[1].level, coins: r[1].coins, friendRequest: r[1].friendRequest, friendList: r[1].friendList });
+                res.send({
+                    'status': 'success',
+                    id: r[1].id,
+                    level: r[1].level,
+                    coins: r[1].coins,
+                    totalXP: r[1].totalXP,
+                    friendRequest: r[1].friendRequest,
+                    friendList: r[1].friendList,
+                    achievementStatus: r[1].achievementStatus,
+                    numLife: r[1].numLife,
+                });
             } else {
                 //console.log("------------------------------B");
                 res.send({ 'status': 'fail' });

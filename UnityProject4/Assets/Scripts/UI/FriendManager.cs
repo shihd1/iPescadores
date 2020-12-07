@@ -121,10 +121,13 @@ public class FriendManager : MonoBehaviour
     {
         string id = localData.GetComponent<Data>().id;
         string friendID = ServerService.getID(username.text);
-        if(friendID==null)
+        Transform Panel = GameObject.Find("Canvas").transform.Find("Account - Yes or No");
+        Text t = Panel.transform.Find("Display Info").transform.Find("Text").gameObject.GetComponent<Text>();
+        if (friendID==null)
         {
             //Display: can't find user
             Debug.Log("Can't find user");
+            t.text = "Can't find user";
         }
         else
         {
@@ -133,13 +136,16 @@ public class FriendManager : MonoBehaviour
             {
                 //Display: sent friend request
                 Debug.Log("Success! Sent friend request");
+                t.text = "Success! Sent friend request";
             }
             else
             {
                 //Display: fail to send
-                Debug.Log("Fail to send");
+                Debug.Log("Already Sent or Fail to send");
+                t.text = "Already Sent or Fail to send";
             }
         }
+        Panel.gameObject.SetActive(true);
     }
     
     public void confirmFriendRequest(Text username)

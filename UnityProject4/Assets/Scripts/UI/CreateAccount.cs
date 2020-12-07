@@ -29,7 +29,6 @@ public class CreateAccount : MonoBehaviour
 
     public void createAccount()
     {
-
         if (password.text != confirmPassword.text)
         {
             info.text = "Password does not match!";
