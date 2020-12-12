@@ -21,7 +21,7 @@ public class ProgressBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetCurrentFill();
+
     }
     void GetCurrentFill()
     {
@@ -30,5 +30,29 @@ public class ProgressBar : MonoBehaviour
         float fillAmount = currentOffset / maximumOffset;
         mask.fillAmount = fillAmount;
         fill.color = color;
+    }
+    public void setFill()
+    {
+        int totalXP = GameObject.Find("Local Data").GetComponent<Data>().totalXP;
+        int[] xpLevels = new int[] {0, 100, 350, 850, 1600, 2600, 4600, 7600, 11600, 16600, 22600, 29600, 37600, 46600, 56600, 67600, 78600, 92600, 106600, 121600};
+        for(int i = xpLevels.Length-1; i>=0; i--)
+        {
+            if(totalXP >= xpLevels[i])
+            {
+                minimum = xpLevels[i];
+                current = totalXP;
+                if (i == xpLevels.Length - 1)
+                {
+                    maximum = totalXP;
+                }
+                else
+                {
+                    maximum = xpLevels[i + 1];
+                }
+                transform.Find("Text (TMP)").GetComponent<TMPro.TextMeshProUGUI>().text = ""+(i+1);
+                break;
+            }
+        }
+        GetCurrentFill();
     }
 }

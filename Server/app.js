@@ -68,7 +68,6 @@ async function getID(username) {
 
         const database = client.db("PenghuProject");
         const collection = database.collection("UserInfo");
-
         const query = { username: username };
         const options = { upsert: false };
 
@@ -204,23 +203,6 @@ async function addFriend(userID, friendID) {
         return end;
     }
 }
-async function loadFriend(id) {
-    var end;
-    try {
-        await client.connect();
-
-        const database = client.db("PenghuProject");
-        const collection = database.collection("UserInfo");
-
-        const query = { id: id };
-        const options = { upsert: false };
-
-        var result = await collection.findOne(query, options);
-        end = result.count() == 0;
-    } finally {
-        return [end, result];
-    }
-}
 async function removeFriendRequest(userID, friendID) {
     try {
         await client.connect();
@@ -248,6 +230,70 @@ async function removeFriendRequest(userID, friendID) {
     }
 }
 
+//Update User Info
+async function updateTotalXP(userID, newXP) {
+    try {
+        await client.connect();
+
+        const database = client.db("PenghuProject");
+        const collection = database.collection("UserInfo");
+        const filter = { id: parseInt(userID) };
+        const options = { upsert: false };
+        const updateDoc = {
+            $set: {
+                totalXP: newXP
+            }
+        };
+        var result = await collection.updateOne(filter, updateDoc, options);
+        end = result.modifiedCount == 1;
+    } finally {
+        return end;
+    }
+}
+async function updateAchievementStatus(userID, index) {
+    try {
+        await client.connect();
+
+        const database = client.db("PenghuProject");
+        const collection = database.collection("UserInfo");
+        const filter = { id: parseInt(userID) };
+        const options = { upsert: false };
+
+        var result = await collection.findOne(filter, options);
+        result.achievementStatus[index] = true;
+        const updateDoc = {
+            $set: {
+                achievementStatus: result.achievementStatus
+            }
+        };
+        var result = await collection.updateOne(filter, updateDoc, options);
+        end = result.modifiedCount == 1;
+    } finally {
+        return end;
+    }
+}
+async function updateNumLife(userID, index, newLife) {
+    try {
+        await client.connect();
+
+        const database = client.db("PenghuProject");
+        const collection = database.collection("UserInfo");
+        const filter = { id: parseInt(userID) };
+        const options = { upsert: false };
+
+        var result = await collection.findOne(filter, options);
+        result.numLife[index] = newLife;
+        const updateDoc = {
+            $set: {
+                numLife: result.numLife
+            }
+        };
+        var result = await collection.updateOne(filter, updateDoc, options);
+        end = result.modifiedCount == 1;
+    } finally {
+        return end;
+    }
+}
 
 app.get('/getLevel/:id', (req, res) => {
     var id = req.params.id;
@@ -259,6 +305,35 @@ app.get('/getLevel/:id', (req, res) => {
             res.send({ 'status': 'fail' });
         })
 })
+app.get('/getID/:username', (req, res) => {
+    var username = req.params.username;
+    getID(username)
+        .then((r) => {
+            //console.log("------------------------------")
+            if (r != null) {
+                //console.log("------------------------------A");
+                res.send({ 'status': 'success', id: r.id });
+            } else {
+                //console.log("------------------------------B");
+                res.send({ 'status': 'fail' });
+            }
+        })
+        .catch(() => {
+            //console.log("------------------------------C");
+            res.send({ 'status': 'fail' });
+        });
+});
+app.get('/getusername/:id', (req, res) => {
+    var id = req.params.id;
+    getUsername(id)
+        .then((r) => {
+            res.send({ 'status': 'success', username: r.username });
+        })
+        .catch(() => {
+            res.send({ 'status': 'fail' });
+        })
+});
+
 app.get('/userexist/:username', (req, res) => {
     var username = req.params.username;
     checkUser(username)
@@ -317,6 +392,7 @@ app.get('/signin/:username/:password', (req, res) => {
             res.send({ 'status': 'fail' });
         });
 });
+
 app.get('/sendfriendrequest/:userID/:friendID', (req, res) => {
     var userID = req.params.userID;
     var friendID = req.params.friendID;
@@ -362,12 +438,32 @@ app.get('/removefriendrequest/:userID/:friendID', (req, res) => {
             res.send({ 'status': 'fail' });
         })
 });
-app.get('/loadfriend/:id', (req, res) => {
-    var id = req.params.id;
-    loadFriend(id)
+// app.get('/loadfriend/:id', (req, res) => {
+//     var id = req.params.id;
+//     getUsername(id)
+//         .then((r) => {
+//             console.log("------------------------------")
+//             if (r != null) {
+//                 console.log("------------------------------A");
+//                 res.send({ 'status': 'success', username: r.username });
+//             } else {
+//                 console.log("------------------------------B");
+//                 res.send({ 'status': 'fail' });
+//             }
+//         })
+//         .catch(() => {
+//             console.log("------------------------------C");
+//             res.send({ 'status': 'fail' });
+//         });
+// });
+
+app.get('/updateTotalXP/:userID/:newXP', (req, res) => {
+    var userID = req.params.userID;
+    var newXP = req.params.newXP;
+    updateTotalXP(userID, newXP)
         .then((r) => {
-            if (r[0] == true) {
-                res.send({ 'status': 'success', friends: r[1].friendID });
+            if (r == true) {
+                res.send({ 'status': 'success' });
             } else {
                 res.send({ 'status': 'fail' });
             }
@@ -376,41 +472,36 @@ app.get('/loadfriend/:id', (req, res) => {
             res.send({ 'status': 'fail' });
         })
 });
-app.get('/getID/:username', (req, res) => {
-    var username = req.params.username;
-    getID(username)
+app.get('/updateAchievementStatus/:userID/:index', (req, res) => {
+    var userID = req.params.userID;
+    var index = req.params.index;
+    updateAchievementStatus(userID, index)
         .then((r) => {
-            //console.log("------------------------------")
-            if (r != null) {
-                //console.log("------------------------------A");
-                res.send({ 'status': 'success', id: r.id });
+            if (r == true) {
+                res.send({ 'status': 'success' });
             } else {
-                //console.log("------------------------------B");
                 res.send({ 'status': 'fail' });
             }
         })
         .catch(() => {
-            //console.log("------------------------------C");
             res.send({ 'status': 'fail' });
-        });
+        })
 });
-app.get('/getusername/:id', (req, res) => {
-    var id = req.params.id;
-    getUsername(id)
+app.get('/updateNumLife/:userID/:index/:newLife', (req, res) => {
+    var userID = req.params.userID;
+    var index = req.params.index;
+    var newLife = req.params.newLife;
+    updateNumLife(userID, index, newLife)
         .then((r) => {
-            console.log("------------------------------")
-            if (r != null) {
-                console.log("------------------------------A");
-                res.send({ 'status': 'success', username: r.username });
+            if (r == true) {
+                res.send({ 'status': 'success' });
             } else {
-                console.log("------------------------------B");
                 res.send({ 'status': 'fail' });
             }
         })
         .catch(() => {
-            console.log("------------------------------C");
             res.send({ 'status': 'fail' });
-        });
+        })
 });
 
 app.listen(port, () => {

@@ -17,6 +17,7 @@ public class ServerService : MonoBehaviour
     {
         
     }
+
     public void getRequest()
     {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/");
@@ -146,6 +147,7 @@ public class ServerService : MonoBehaviour
     }
     public static string getUsername(string id)
     {
+        Debug.Log("id: "+id);
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/getusername/" + id);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
@@ -169,6 +171,40 @@ public class ServerService : MonoBehaviour
     {
         Debug.Log(id + "   " + friendID);
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/removefriendrequest/" + id + "/" + friendID);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
+        return info.status.Equals("success");
+    }
+    public static bool updateTotalXP()
+    {
+        string id = GameObject.Find("Local Data").GetComponent<Data>().id;
+        int newXP = GameObject.Find("Local Data").GetComponent<Data>().totalXP;
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/updateTotalXP/" + id + "/" + newXP);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
+        return info.status.Equals("success");
+    }
+    public static bool updateAchievementStatus(int index)
+    {
+        string id = GameObject.Find("Local Data").GetComponent<Data>().id;
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/updateAchievementStatus/" + id + "/" + index);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
+        return info.status.Equals("success");
+    }
+    public static bool updateNumLife(int index, int newLife)
+    {
+        string id = GameObject.Find("Local Data").GetComponent<Data>().id;
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/updateNumLife/" + id + "/" + index + "/" + newLife);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();

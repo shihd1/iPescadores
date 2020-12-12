@@ -85,7 +85,6 @@ public class FriendManager : MonoBehaviour
                 {
                     currentX = currentX + 1.73f;
                     currentZ = currentZ + 21f;
-
                 }
                 else
                 {

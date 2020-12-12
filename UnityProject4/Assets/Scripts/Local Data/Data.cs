@@ -28,7 +28,8 @@ public class Data : MonoBehaviour
     }
     public void analyzeData()
     {
-        
+        GameObject.Find("Canvas").transform.Find("Main Page").transform.Find("Radial Progress bar").GetComponent<ProgressBar>().setFill();
+
         for(int i = 0; i < achievementStatus.Length; i++)
         {
             if (achievementStatus[i])
@@ -43,7 +44,7 @@ public class Data : MonoBehaviour
                     .gameObject.SetActive(true);
             }
         }
-        
+        //sServerService.updateAchievementStatus(1);
         //Add some way to instantiate the animals and plants.
     }
 }
