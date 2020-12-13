@@ -9,7 +9,6 @@ public class ButtonRejectFriendRequest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Start");
         Button btn = GetComponent<Button>();
         btn.onClick.AddListener(delegate
         {
@@ -24,7 +23,8 @@ public class ButtonRejectFriendRequest : MonoBehaviour
     }
     public void OnClick()
     {
-        Debug.Log("CLICKED, "+id.text);
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         GameObject.Find("Manager").GetComponent<FriendManager>().rejectFriendRequest(id);
+        transform.parent.gameObject.SetActive(false);
     }
 }

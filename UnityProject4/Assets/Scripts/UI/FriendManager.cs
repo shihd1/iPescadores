@@ -13,7 +13,7 @@ public class FriendManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //showFriend(1, new Vector3(0, 0, 0));
     }
 
     // Update is called once per frame
@@ -25,6 +25,7 @@ public class FriendManager : MonoBehaviour
     //Start functions
     public void showAllFriends()
     {
+        Debug.Log(this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         initializeFriendLocations();
         //Get friend ID & Put them in the world
         string[] friendID = localData.GetComponent<Data>().friendID;
@@ -63,8 +64,8 @@ public class FriendManager : MonoBehaviour
         localData.GetComponent<Data>().friendLocation = new Point[friendID.Length];
         Point[] friendLocation = localData.GetComponent<Data>().friendLocation;
 
-        float[] addX = new float[] { 17.3f, -1.73f, -19.03f, -17.3f, 1.73f, 19.03f };
-        float[] addZ = new float[] { -12f, -21f, -9f, 12f, 21f, 9f };
+        float[] addX = new float[] {17.3f, -1.73f, -19.03f, -17.3f, 1.73f, 19.03f };
+        float[] addZ = new float[] {-12f, -21f, -9f, 12f, 21f, 9f };
 
         int counter = 0;
         int loop = 1;
@@ -118,6 +119,7 @@ public class FriendManager : MonoBehaviour
     //Functions
     public void sendRequest(Text username)
     {
+        Debug.Log(this.ToString()+" "+System.Reflection.MethodBase.GetCurrentMethod().Name);
         string id = localData.GetComponent<Data>().id;
         string friendID = ServerService.getID(username.text);
         Transform Panel = GameObject.Find("Canvas").transform.Find("Account - Yes or No");

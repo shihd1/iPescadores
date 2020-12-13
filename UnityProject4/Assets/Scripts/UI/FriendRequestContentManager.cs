@@ -18,9 +18,9 @@ public class FriendRequestContentManager : MonoBehaviour
     {
         
     }
-
     public void showFriendRequests()
     {
+        Debug.Log(this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         string[] friendsID = GameObject.Find("Local Data").GetComponent<Data>().friendRequestID;
         for (int i = 0; i < friendsID.Length; i++)
         {

@@ -28,6 +28,7 @@ public class ServerService : MonoBehaviour
     }
     public static string usernameExist(string username)
     {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/userexist/"+username);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
@@ -46,6 +47,7 @@ public class ServerService : MonoBehaviour
     }
     public static string createUser(string username, string firstname, string lastname, string password)
     {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         var cryptoMD5 = System.Security.Cryptography.MD5.Create();
         var bytes = Encoding.UTF8.GetBytes(password);
         var hash = cryptoMD5.ComputeHash(bytes);
@@ -71,6 +73,7 @@ public class ServerService : MonoBehaviour
     }
     public static bool signIn(string username, string password)
     {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         var cryptoMD5 = System.Security.Cryptography.MD5.Create();
         var bytes = Encoding.UTF8.GetBytes(password);
         var hash = cryptoMD5.ComputeHash(bytes);
@@ -92,7 +95,12 @@ public class ServerService : MonoBehaviour
             GameObject.Find("Local Data").GetComponent<Data>().achievementStatus = o.achievementStatus;
             GameObject.Find("Local Data").GetComponent<Data>().numLife = o.numLife;
             GameObject.Find("Manager").GetComponent<FriendManager>().showAllFriends();
-
+            GameObject.Find("Canvas")
+                .transform.Find("Friend Requests")
+                .transform.Find("Scroll View")
+                .transform.Find("Viewport")
+                .transform.Find("Content")
+                .GetComponent<FriendRequestContentManager>().showFriendRequests();
             GameObject.Find("Local Data").GetComponent<Data>().analyzeData();
             GameObject.Find("Canvas")
                 .transform.Find("Main Page")
@@ -109,6 +117,7 @@ public class ServerService : MonoBehaviour
     }
     public static int getLevel(string id)
     {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/getLevel/" + id);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
@@ -127,6 +136,7 @@ public class ServerService : MonoBehaviour
     }
     public static bool sendFriendRequest(string id, string friendID)
     {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/sendfriendrequest/" + id + "/" + friendID);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
@@ -137,6 +147,7 @@ public class ServerService : MonoBehaviour
     }
     public static string getID(string username)
     {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/getID/" + username);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
@@ -147,7 +158,7 @@ public class ServerService : MonoBehaviour
     }
     public static string getUsername(string id)
     {
-        Debug.Log("id: "+id);
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/getusername/" + id);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
@@ -158,7 +169,7 @@ public class ServerService : MonoBehaviour
     }
     public static bool addFriend(string id, string friendID)
     {
-        Debug.Log(id + "   " + friendID);
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/addFriend/" + id + "/" + friendID);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
@@ -169,7 +180,7 @@ public class ServerService : MonoBehaviour
     }
     public static bool removeFriendRequest(string id, string friendID)
     {
-        Debug.Log(id + "   " + friendID);
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/removefriendrequest/" + id + "/" + friendID);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
@@ -180,6 +191,7 @@ public class ServerService : MonoBehaviour
     }
     public static bool updateTotalXP()
     {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         string id = GameObject.Find("Local Data").GetComponent<Data>().id;
         int newXP = GameObject.Find("Local Data").GetComponent<Data>().totalXP;
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/updateTotalXP/" + id + "/" + newXP);
@@ -192,6 +204,7 @@ public class ServerService : MonoBehaviour
     }
     public static bool updateAchievementStatus(int index)
     {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         string id = GameObject.Find("Local Data").GetComponent<Data>().id;
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/updateAchievementStatus/" + id + "/" + index);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -203,6 +216,7 @@ public class ServerService : MonoBehaviour
     }
     public static bool updateNumLife(int index, int newLife)
     {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         string id = GameObject.Find("Local Data").GetComponent<Data>().id;
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/updateNumLife/" + id + "/" + index + "/" + newLife);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();

@@ -10,7 +10,6 @@ public class ButtonConfirmFriendRequest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Start");
         Button btn = GetComponent<Button>();
         btn.onClick.AddListener(delegate
         {
@@ -25,7 +24,13 @@ public class ButtonConfirmFriendRequest : MonoBehaviour
     }
     public void OnClick()
     {
-        Debug.Log("CLICKED, "+id.text);
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         GameObject.Find("Manager").GetComponent<FriendManager>().confirmFriendRequest(id);
+        transform.parent.gameObject.SetActive(false);
+        Transform infoCanvas = GameObject.Find("Canvas").transform.Find("Account - Yes or No");
+        infoCanvas.transform.Find("Display Info").Find("Text").GetComponent<Text>().text = "Confirmed!";
+        infoCanvas.transform.Find("Display Info").Find("MoveOn").gameObject.SetActive(true);
+        infoCanvas.transform.Find("Display Info").Find("Redo").gameObject.SetActive(false);
+        infoCanvas.gameObject.SetActive(true);
     }
 }

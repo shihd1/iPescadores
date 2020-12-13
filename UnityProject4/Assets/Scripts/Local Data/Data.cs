@@ -28,6 +28,8 @@ public class Data : MonoBehaviour
     }
     public void analyzeData()
     {
+        Debug.Log(this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
         GameObject.Find("Canvas").transform.Find("Main Page").transform.Find("Radial Progress bar").GetComponent<ProgressBar>().setFill();
 
         for(int i = 0; i < achievementStatus.Length; i++)

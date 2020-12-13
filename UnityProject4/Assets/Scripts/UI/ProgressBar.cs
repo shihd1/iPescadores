@@ -33,6 +33,7 @@ public class ProgressBar : MonoBehaviour
     }
     public void setFill()
     {
+        Debug.Log(this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         int totalXP = GameObject.Find("Local Data").GetComponent<Data>().totalXP;
         int[] xpLevels = new int[] {0, 100, 350, 850, 1600, 2600, 4600, 7600, 11600, 16600, 22600, 29600, 37600, 46600, 56600, 67600, 78600, 92600, 106600, 121600};
         for(int i = xpLevels.Length-1; i>=0; i--)

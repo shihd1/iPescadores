@@ -29,6 +29,7 @@ public class CreateAccount : MonoBehaviour
 
     public void createAccount()
     {
+        Debug.Log(this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         if (password.text != confirmPassword.text)
         {
             info.text = "Password does not match!";

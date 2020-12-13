@@ -15,6 +15,7 @@ public class CoinPanel: MonoBehaviour
     }
     public void updateCoinCount()
     {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         GetComponent<TMPro.TextMeshProUGUI>().text = ""+GameObject.Find("Local Data").GetComponent<Data>().coins;
     }
 }
