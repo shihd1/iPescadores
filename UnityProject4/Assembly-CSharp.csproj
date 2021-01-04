@@ -73,6 +73,7 @@
     <Compile Include="Assets\Asset Store\UITween\Scripts\UITween.cs" />
     <Compile Include="Assets\Scripts\CameraHandler.cs" />
     <Compile Include="Assets\Scripts\CameraRotator.cs" />
+    <Compile Include="Assets\Scripts\DeviceCameraHandler.cs" />
     <Compile Include="Assets\Scripts\Local Data\Data.cs" />
     <Compile Include="Assets\Scripts\Local Data\PlayerProfile.cs" />
     <Compile Include="Assets\Scripts\Local Data\SaveData.cs" />
