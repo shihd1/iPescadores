@@ -368,9 +368,7 @@ app.get('/signin/:username/:password', (req, res) => {
     var password = req.params.password;
     signIn(username, password)
         .then((r) => {
-            //console.log("------------------------------")
             if (r[0] == true) {
-                //console.log("------------------------------A");
                 res.send({
                     'status': 'success',
                     id: r[1].id,
@@ -383,12 +381,10 @@ app.get('/signin/:username/:password', (req, res) => {
                     numLife: r[1].numLife,
                 });
             } else {
-                //console.log("------------------------------B");
                 res.send({ 'status': 'fail' });
             }
         })
         .catch(() => {
-            //console.log("------------------------------C");
             res.send({ 'status': 'fail' });
         });
 });
