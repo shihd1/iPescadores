@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class ServerService : MonoBehaviour
 {
+    private static string appserver = "http://18.218.236.171:3000";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,7 @@ public class ServerService : MonoBehaviour
 
     public void getRequest()
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/");
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver+"/");
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -29,7 +31,7 @@ public class ServerService : MonoBehaviour
     public static string usernameExist(string username)
     {
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/userexist/"+username);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver+"/userexist/"+username);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -53,7 +55,7 @@ public class ServerService : MonoBehaviour
         var hash = cryptoMD5.ComputeHash(bytes);
         string encryptedPassword = BitConverter.ToString(hash).Replace("-",string.Empty);
 
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/useradd/" + username + "/" + firstname + "/" + lastname + "/" + encryptedPassword);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver+"/useradd/" + username + "/" + firstname + "/" + lastname + "/" + encryptedPassword);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -78,7 +80,7 @@ public class ServerService : MonoBehaviour
         var bytes = Encoding.UTF8.GetBytes(password);
         var hash = cryptoMD5.ComputeHash(bytes);
         string encryptedPassword = BitConverter.ToString(hash).Replace("-", string.Empty);
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/signin/" + username + "/" + encryptedPassword);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver+"/signin/" + username + "/" + encryptedPassword);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -118,7 +120,7 @@ public class ServerService : MonoBehaviour
     public static int getLevel(string id)
     {
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/getLevel/" + id);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver+"/getLevel/" + id);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -137,7 +139,7 @@ public class ServerService : MonoBehaviour
     public static bool sendFriendRequest(string id, string friendID)
     {
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/sendfriendrequest/" + id + "/" + friendID);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver+"/sendfriendrequest/" + id + "/" + friendID);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -148,7 +150,7 @@ public class ServerService : MonoBehaviour
     public static string getID(string username)
     {
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/getID/" + username);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver+"/getID/" + username);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -159,7 +161,7 @@ public class ServerService : MonoBehaviour
     public static string getUsername(string id)
     {
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/getusername/" + id);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver+"/getusername/" + id);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -170,7 +172,7 @@ public class ServerService : MonoBehaviour
     public static bool addFriend(string id, string friendID)
     {
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/addFriend/" + id + "/" + friendID);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver+"/addFriend/" + id + "/" + friendID);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -181,7 +183,7 @@ public class ServerService : MonoBehaviour
     public static bool removeFriendRequest(string id, string friendID)
     {
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/removefriendrequest/" + id + "/" + friendID);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver+"/removefriendrequest/" + id + "/" + friendID);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -194,7 +196,7 @@ public class ServerService : MonoBehaviour
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         string id = GameObject.Find("Local Data").GetComponent<Data>().id;
         int newXP = GameObject.Find("Local Data").GetComponent<Data>().totalXP;
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/updateTotalXP/" + id + "/" + newXP);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver+"/updateTotalXP/" + id + "/" + newXP);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -206,7 +208,7 @@ public class ServerService : MonoBehaviour
     {
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         string id = GameObject.Find("Local Data").GetComponent<Data>().id;
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/updateAchievementStatus/" + id + "/" + index);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver+"/updateAchievementStatus/" + id + "/" + index);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -218,7 +220,7 @@ public class ServerService : MonoBehaviour
     {
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         string id = GameObject.Find("Local Data").GetComponent<Data>().id;
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:3000/updateNumLife/" + id + "/" + index + "/" + newLife);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver+"/updateNumLife/" + id + "/" + index + "/" + newLife);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();

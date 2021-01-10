@@ -1,7 +1,7 @@
-const e = require('express');
 const express = require('express')
 const app = express()
 const port = 3000
+const router = require('./router');
 
 const { MongoClient } = require("mongodb");
 
@@ -9,6 +9,11 @@ const { MongoClient } = require("mongodb");
 const uri = "mongodb://localhost:27017/";
 
 const client = new MongoClient(uri);
+
+//router
+app.use(express.static('public'));
+app.set('view engine', 'ejs');
+app.use('/upload', router);
 
 async function run() {
     try {

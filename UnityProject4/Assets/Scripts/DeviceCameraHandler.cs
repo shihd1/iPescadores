@@ -69,21 +69,19 @@ public class DeviceCameraHandler : MonoBehaviour
     public void TakePhoto()  // Start this Coroutine on some button click
     {
         // NOTE - you almost certainly have to do this here:
-
         // it's a rare case where the Unity doco is pretty clear,
         // http://docs.unity3d.com/ScriptReference/WaitForEndOfFrame.html
         // be sure to scroll down to the SECOND long example on that doco page 
-        /*
+        
         Texture2D photo = new Texture2D(backCam.width, backCam.height);
         photo.SetPixels(backCam.GetPixels());
         photo.Apply();
 
         //Encode to a PNG
         byte[] bytes = photo.EncodeToJPG();
-        */
+        
         //Write out the PNG.
-        //File.WriteAllBytes(Application.persistentDataPath + "/saves/" + "photo.JPG", bytes);
-        //UnityEngine.Debug.Log(Application.persistentDataPath + "/saves/" + "photo.png");
+        File.WriteAllBytes(Application.persistentDataPath + "/saves/" + "photo.JPG", bytes);
     }
     public void TakeSamplePhoto()  // Start this Coroutine on some button click
     {/*

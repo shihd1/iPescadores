@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\Local Data\PlayerProfile.cs" />
     <Compile Include="Assets\Scripts\Local Data\SaveData.cs" />
     <Compile Include="Assets\Scripts\Local Data\SerializationManager.cs" />
+    <Compile Include="Assets\Scripts\PictureScript.cs" />
     <Compile Include="Assets\Scripts\ScrollAndPinch.cs" />
     <Compile Include="Assets\Scripts\Server\ServerService.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonConfirmFriendRequest.cs" />
