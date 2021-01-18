@@ -52,21 +52,6 @@ async function run() {
 }
 
 //General
-async function getLevel(InputID) {
-    try {
-        await client.connect();
-
-        const database = client.db("PenghuProject");
-        const collection = database.collection("UserInfo");
-        console.log(InputID);
-        const query = { 'id': parseInt(InputID) };
-        const options = { upsert: false };
-
-        var result = await collection.findOne(query, options);
-    } finally {
-        return [result];
-    }
-}
 async function getID(username) {
     try {
         await client.connect();
@@ -81,15 +66,13 @@ async function getID(username) {
         return result;
     }
 }
-async function getUsername(id) {
-    console.log(id);
+async function getPerson(id) {
     try {
         await client.connect();
 
         const database = client.db("PenghuProject");
         const collection = database.collection("UserInfo");
-
-        const query = { id: parseInt(id) };
+        const query = { 'id': parseInt(id) };
         const options = { upsert: false };
 
         var result = await collection.findOne(query, options);
@@ -300,16 +283,6 @@ async function updateNumLife(userID, index, newLife) {
     }
 }
 
-app.get('/getLevel/:id', (req, res) => {
-    var id = req.params.id;
-    getLevel(id)
-        .then((r) => {
-            res.send({ 'status': 'success', level: r[0].level });
-        })
-        .catch(() => {
-            res.send({ 'status': 'fail' });
-        })
-})
 app.get('/getID/:username', (req, res) => {
     var username = req.params.username;
     getID(username)
@@ -328,15 +301,59 @@ app.get('/getID/:username', (req, res) => {
             res.send({ 'status': 'fail' });
         });
 });
-app.get('/getusername/:id', (req, res) => {
+app.get('/getLevel/:id', (req, res) => {
     var id = req.params.id;
-    getUsername(id)
+    getPerson(id)
         .then((r) => {
-            res.send({ 'status': 'success', username: r.username });
+            //console.log("------------------------------")
+            if (r != null) {
+                //console.log("------------------------------A");
+                res.send({ 'status': 'success', level: r.level });
+            } else {
+                //console.log("------------------------------B");
+                res.send({ 'status': 'fail' });
+            }
         })
         .catch(() => {
+            //console.log("------------------------------C");
             res.send({ 'status': 'fail' });
+        });
+})
+app.get('/getusername/:id', (req, res) => {
+    var id = req.params.id;
+    getPerson(id)
+        .then((r) => {
+            //console.log("------------------------------")
+            if (r != null) {
+                //console.log("------------------------------A");
+                res.send({ 'status': 'success', username: r.username });
+            } else {
+                //console.log("------------------------------B");
+                res.send({ 'status': 'fail' });
+            }
         })
+        .catch(() => {
+            //console.log("------------------------------C");
+            res.send({ 'status': 'fail' });
+        });
+});
+app.get('/getXP/:id', (req, res) => {
+    var id = req.params.id;
+    getPerson(id)
+        .then((r) => {
+            //console.log("------------------------------")
+            if (r != null) {
+                //console.log("------------------------------A");
+                res.send({ 'status': 'success', totalXP: r.totalXP });
+            } else {
+                //console.log("------------------------------B");
+                res.send({ 'status': 'fail' });
+            }
+        })
+        .catch(() => {
+            //console.log("------------------------------C");
+            res.send({ 'status': 'fail' });
+        });
 });
 
 app.get('/userexist/:username', (req, res) => {
