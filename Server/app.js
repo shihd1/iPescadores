@@ -229,7 +229,26 @@ async function updateTotalXP(userID, newXP) {
         const options = { upsert: false };
         const updateDoc = {
             $set: {
-                totalXP: newXP
+                totalXP: parseInt(newXP)
+            }
+        };
+        var result = await collection.updateOne(filter, updateDoc, options);
+        end = result.modifiedCount == 1;
+    } finally {
+        return end;
+    }
+}
+async function updateCoins(userID, newCoins) {
+    try {
+        await client.connect();
+
+        const database = client.db("PenghuProject");
+        const collection = database.collection("UserInfo");
+        const filter = { id: parseInt(userID) };
+        const options = { upsert: false };
+        const updateDoc = {
+            $set: {
+                coins: parseInt(newCoins)
             }
         };
         var result = await collection.updateOne(filter, updateDoc, options);
@@ -345,6 +364,24 @@ app.get('/getXP/:id', (req, res) => {
             if (r != null) {
                 //console.log("------------------------------A");
                 res.send({ 'status': 'success', totalXP: r.totalXP });
+            } else {
+                //console.log("------------------------------B");
+                res.send({ 'status': 'fail' });
+            }
+        })
+        .catch(() => {
+            //console.log("------------------------------C");
+            res.send({ 'status': 'fail' });
+        });
+});
+app.get('/getCoins/:id', (req, res) => {
+    var id = req.params.id;
+    getPerson(id)
+        .then((r) => {
+            //console.log("------------------------------")
+            if (r != null) {
+                //console.log("------------------------------A");
+                res.send({ 'status': 'success', coins: r.coins });
             } else {
                 //console.log("------------------------------B");
                 res.send({ 'status': 'fail' });
@@ -479,6 +516,21 @@ app.get('/updateTotalXP/:userID/:newXP', (req, res) => {
     var userID = req.params.userID;
     var newXP = req.params.newXP;
     updateTotalXP(userID, newXP)
+        .then((r) => {
+            if (r == true) {
+                res.send({ 'status': 'success' });
+            } else {
+                res.send({ 'status': 'fail' });
+            }
+        })
+        .catch(() => {
+            res.send({ 'status': 'fail' });
+        })
+});
+app.get('/updateCoins/:userID/:newCoins', (req, res) => {
+    var userID = req.params.userID;
+    var newCoins = req.params.newCoins;
+    updateCoins(userID, newCoins)
         .then((r) => {
             if (r == true) {
                 res.send({ 'status': 'success' });
