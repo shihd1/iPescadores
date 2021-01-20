@@ -301,6 +301,25 @@ async function updateNumLife(userID, index, newLife) {
         return end;
     }
 }
+async function updateLevel(userID, newLevel) {
+    try {
+        await client.connect();
+
+        const database = client.db("PenghuProject");
+        const collection = database.collection("UserInfo");
+        const filter = { id: parseInt(userID) };
+        const options = { upsert: false };
+        const updateDoc = {
+            $set: {
+                level: parseInt(newLevel)
+            }
+        };
+        var result = await collection.updateOne(filter, updateDoc, options);
+        end = result.modifiedCount == 1;
+    } finally {
+        return end;
+    }
+}
 
 app.get('/getID/:username', (req, res) => {
     var username = req.params.username;
@@ -531,6 +550,21 @@ app.get('/updateCoins/:userID/:newCoins', (req, res) => {
     var userID = req.params.userID;
     var newCoins = req.params.newCoins;
     updateCoins(userID, newCoins)
+        .then((r) => {
+            if (r == true) {
+                res.send({ 'status': 'success' });
+            } else {
+                res.send({ 'status': 'fail' });
+            }
+        })
+        .catch(() => {
+            res.send({ 'status': 'fail' });
+        })
+});
+app.get('/updateLevel/:userID/:newLevel', (req, res) => {
+    var userID = req.params.userID;
+    var newLevel = req.params.newLevel;
+    updateLevel(userID, newLevel)
         .then((r) => {
             if (r == true) {
                 res.send({ 'status': 'success' });
