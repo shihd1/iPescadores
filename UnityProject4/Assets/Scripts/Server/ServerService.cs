@@ -169,6 +169,28 @@ public class ServerService : MonoBehaviour
         Output info = JsonUtility.FromJson<Output>(jsonResponse);
         return info.username;
     }
+    public static int getXP(string id)
+    {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver + "/getXP/" + id);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
+        return info.totalXP;
+    }
+    public static int getCoins(string id)
+    {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver + "/getCoins/" + id);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
+        return info.coins;
+    }
     public static bool addFriend(string id, string friendID)
     {
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
@@ -204,6 +226,43 @@ public class ServerService : MonoBehaviour
         Output info = JsonUtility.FromJson<Output>(jsonResponse);
         return info.status.Equals("success");
     }
+    public static bool updateTotalXP(string friendID, int xp)
+    {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        int newXP = ServerService.getXP(friendID)+xp;
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver + "/updateTotalXP/" + friendID + "/" + newXP);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
+        return info.status.Equals("success");
+    }
+    public static bool updateCoins()
+    {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        string id = GameObject.Find("Local Data").GetComponent<Data>().id;
+        int newCoins = GameObject.Find("Local Data").GetComponent<Data>().coins;
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver + "/updateCoins/" + id + "/" + newCoins);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
+        return info.status.Equals("success");
+    }
+    public static bool updateCoins(string friendID,int coins)
+    {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        int newCoins = ServerService.getCoins(friendID)+coins;
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver + "/updateCoins/" + friendID + "/" + newCoins);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
+        return info.status.Equals("success");
+    }
     public static bool updateAchievementStatus(int index)
     {
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
@@ -221,6 +280,19 @@ public class ServerService : MonoBehaviour
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         string id = GameObject.Find("Local Data").GetComponent<Data>().id;
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver+"/updateNumLife/" + id + "/" + index + "/" + newLife);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
+        return info.status.Equals("success");
+    }
+    public static bool updateLevel()
+    {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        string id = GameObject.Find("Local Data").GetComponent<Data>().id;
+        int level = GameObject.Find("Local Data").GetComponent<Data>().level;
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver + "/updateLevel/" + id + "/" + level);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();

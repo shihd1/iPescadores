@@ -159,6 +159,26 @@ public class FriendManager : MonoBehaviour
         {
             //Display: added friend
             Debug.Log("Success! Added friend (from both ways)");
+
+            //Update Total XP
+            localData.GetComponent<Data>().totalXP += 50;
+            bool updatedTotalXP = ServerService.updateTotalXP() && ServerService.updateTotalXP(friendID,50);
+            GameObject.Find("Canvas").transform.Find("Main Page").transform.Find("Radial Progress bar").GetComponent<ProgressBar>().setFill();
+            if (updatedTotalXP)
+                Debug.Log("UpdatedTotalXP");
+            else
+                Debug.Log("Could not update totalXP");
+
+            //Update Coins
+            localData.GetComponent<Data>().coins += 50;
+            bool updatedCoins = ServerService.updateCoins() && ServerService.updateCoins(friendID,50);
+            GameObject.Find("Canvas").transform.Find("Main Page").transform.Find("Horizontal Panel").transform.Find("Text (TMP)").GetComponent<CoinPanel>().updateCoinCount();
+            if (updatedTotalXP)
+                Debug.Log("UpdatedCoins");
+            else
+                Debug.Log("Could not update coins");
+
+            //Remove friend Request
             bool removeSuccess = ServerService.removeFriendRequest(id, friendID);
             if (removeSuccess)
             {

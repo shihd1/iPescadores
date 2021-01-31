@@ -51,6 +51,8 @@ public class ProgressBar : MonoBehaviour
                     maximum = xpLevels[i + 1];
                 }
                 transform.Find("Text (TMP)").GetComponent<TMPro.TextMeshProUGUI>().text = ""+(i+1);
+                GameObject.Find("Local Data").GetComponent<Data>().level = i+1;
+                ServerService.updateLevel();
                 break;
             }
         }

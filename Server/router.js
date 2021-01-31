@@ -11,6 +11,7 @@ router.get('/', async function (req, res) {
 });
 
 router.post('/post', upload.single('image'), async function (req, res) {
+    console.log("Upload Images");
     const imagePath = path.join(__dirname, '/public/images');
     const fileUpload = new Resize(imagePath);
     if (!req.file) {
