@@ -52,7 +52,6 @@ public class ProgressBar : MonoBehaviour
                 }
                 transform.Find("Text (TMP)").GetComponent<TMPro.TextMeshProUGUI>().text = ""+(i+1);
                 GameObject.Find("Local Data").GetComponent<Data>().level = i+1;
-                ServerService.updateLevel();
                 break;
             }
         }

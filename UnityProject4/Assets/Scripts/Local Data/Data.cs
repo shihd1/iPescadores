@@ -11,6 +11,7 @@ public class Data : MonoBehaviour
     public int totalXP;
     public bool[] achievementStatus;
     public int[] numLife;
+    public int[] cost;
 
     //Friend info
     public string[] friendID;
@@ -25,11 +26,13 @@ public class Data : MonoBehaviour
         //SerializationManager.Save("playerProgress", SaveData.current.profile);
         //SaveData.current.profile = (PlayerProfile)SerializationManager.Load(Application.persistentDataPath + "/saves/" + "playerProgress" + ".save");
         //Debug.Log(Application.persistentDataPath+"/saves/");
+        
+        //cost = new int[10] { };
     }
     public void analyzeData()
     {
         Debug.Log(this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-
+        
         GameObject.Find("Canvas").transform.Find("Main Page").transform.Find("Radial Progress bar").GetComponent<ProgressBar>().setFill();
 
         for(int i = 0; i < achievementStatus.Length; i++)
@@ -48,6 +51,16 @@ public class Data : MonoBehaviour
         }
         //sServerService.updateAchievementStatus(1);
         //Add some way to instantiate the animals and plants.
+    }
+    public void addCoins(int amount)
+    {
+        coins += amount;
+        GameObject.Find("Canvas")
+                .transform.Find("Main Page")
+                .transform.Find("Horizontal Panel")
+                .transform.Find("Text (TMP)")
+                .GetComponent<CoinPanel>().updateCoinCount();
+        ServerService.updateCoins();
     }
 }
 public class Point

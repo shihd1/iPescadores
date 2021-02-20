@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AchievementManager.cs" />
     <Compile Include="Assets\Asset Store\PolygonObjects\Polygonal Foliage Asset Package\Scripts\Utility\FlyCameraBehaviour.cs" />
     <Compile Include="Assets\Asset Store\UITween\Prefabs\Click Effect Pref\ClickedWaveAnimation.cs" />
     <Compile Include="Assets\Asset Store\UITween\ScenesExamplesScripts\ActivateOnEnable.cs" />
@@ -73,22 +74,27 @@
     <Compile Include="Assets\Asset Store\UITween\Scripts\UITween.cs" />
     <Compile Include="Assets\Scripts\CameraHandler.cs" />
     <Compile Include="Assets\Scripts\CameraRotator.cs" />
+    <Compile Include="Assets\Scripts\DailyCoinScript.cs" />
     <Compile Include="Assets\Scripts\DayNightController.cs" />
     <Compile Include="Assets\Scripts\DeviceCameraHandler.cs" />
+    <Compile Include="Assets\Scripts\FriendManager.cs" />
+    <Compile Include="Assets\Scripts\GeneralManager.cs" />
     <Compile Include="Assets\Scripts\Local Data\Data.cs" />
     <Compile Include="Assets\Scripts\Local Data\PlayerProfile.cs" />
     <Compile Include="Assets\Scripts\Local Data\SaveData.cs" />
     <Compile Include="Assets\Scripts\Local Data\SerializationManager.cs" />
-    <Compile Include="Assets\Scripts\PictureScript.cs" />
+    <Compile Include="Assets\Scripts\LookAtCamera.cs" />
+    <Compile Include="Assets\Scripts\ModelManager.cs" />
     <Compile Include="Assets\Scripts\ScrollAndPinch.cs" />
     <Compile Include="Assets\Scripts\Server\ServerService.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonConfirmFriendRequest.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonRejectFriendRequest.cs" />
     <Compile Include="Assets\Scripts\UI\CoinPanel.cs" />
     <Compile Include="Assets\Scripts\UI\CreateAccount.cs" />
-    <Compile Include="Assets\Scripts\UI\FriendManager.cs" />
     <Compile Include="Assets\Scripts\UI\FriendRequestContentManager.cs" />
+    <Compile Include="Assets\Scripts\UI\PictureScript.cs" />
     <Compile Include="Assets\Scripts\UI\ProgressBar.cs" />
+    <Compile Include="Assets\Scripts\UI\ShopScript.cs" />
     <Compile Include="Assets\Scripts\UI\SignIn.cs" />
     <Compile Include="Assets\Scripts\UI\SwipeMenu.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
