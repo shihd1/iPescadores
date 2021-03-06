@@ -331,6 +331,9 @@
     <Reference Include="UnityEditor">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.1f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="clipper_library">
+      <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/PackageCache/com.unity.cinemachine@2.7.2/Runtime/ThirdParty/clipper_library.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.1f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
@@ -694,6 +697,9 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
@@ -720,6 +726,9 @@
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>

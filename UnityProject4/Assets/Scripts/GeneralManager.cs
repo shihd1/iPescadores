@@ -64,8 +64,8 @@ public class GeneralManager : MonoBehaviour
             .GetComponent<ShopScript>().removeLevelRestrictions();
 
         //Update server data - totalXP, level
-        ServerService.updateLevel();
-        ServerService.updateTotalXP();
+        //ServerService.updateLevel();
+        //ServerService.updateTotalXP();
 
     }
     public static GameObject FindInActiveObjectByName(string name)

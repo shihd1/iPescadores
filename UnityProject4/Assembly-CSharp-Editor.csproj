@@ -265,6 +265,9 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="clipper_library">
+      <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/PackageCache/com.unity.cinemachine@2.7.2/Runtime/ThirdParty/clipper_library.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
@@ -637,6 +640,9 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
@@ -663,6 +669,9 @@
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
