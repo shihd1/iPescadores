@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ServerService : MonoBehaviour
 {
-    private static string appserver = "http://18.218.236.171:3000";
+    private static string appserver = "http://122.118.4.61:3000";
 
     // Start is called before the first frame update
     void Start()
@@ -96,6 +96,7 @@ public class ServerService : MonoBehaviour
             GameObject.Find("Local Data").GetComponent<Data>().friendRequestID = o.friendRequest;
             GameObject.Find("Local Data").GetComponent<Data>().achievementStatus = o.achievementStatus;
             GameObject.Find("Local Data").GetComponent<Data>().numLife = o.numLife;
+            GameObject.Find("Manager").GetComponent<ModelManager>().showMyModel();
             GameObject.Find("Manager").GetComponent<FriendManager>().showAllFriends();
             GameObject.Find("Canvas")
                 .transform.Find("Friend Requests")

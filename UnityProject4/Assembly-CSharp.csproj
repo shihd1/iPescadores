@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AchievementManager.cs" />
+    <Compile Include="Assets\Asset Store\LowPolyWater_Pack\Scripts\LowPolyWater.cs" />
     <Compile Include="Assets\Asset Store\PolygonObjects\Polygonal Foliage Asset Package\Scripts\Utility\FlyCameraBehaviour.cs" />
     <Compile Include="Assets\Asset Store\UITween\Prefabs\Click Effect Pref\ClickedWaveAnimation.cs" />
     <Compile Include="Assets\Asset Store\UITween\ScenesExamplesScripts\ActivateOnEnable.cs" />
@@ -138,7 +139,9 @@
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Asset Store\PolygonObjects\Polygonal Foliage Asset Package\Shaders\Diffuse.shader" />
+    <None Include="Assets\Asset Store\LowPolyWater_Pack\Shaders\WaterShaded.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\Asset Store\LowPolyWater_Pack\LowPoly Island\Credits.txt" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />

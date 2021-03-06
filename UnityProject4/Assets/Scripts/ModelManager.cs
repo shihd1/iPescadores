@@ -17,6 +17,11 @@ public class ModelManager : MonoBehaviour
     {
         
     }
+    public void showMyModel()
+    {
+        int level = GameObject.Find("Local Data").GetComponent<Data>().level;
+        GameObject.Find("Manager").GetComponent<FriendManager>().showFriend(level, new Vector3(0, 0, 0));
+    }
     public void showModel(int index)
     {
         int i = 0;

@@ -56,6 +56,7 @@ public class GeneralManager : MonoBehaviour
         if (currentLevel != newLevel)
         {
             FindInActiveObjectByName("Particle System").SetActive(true);
+            GameObject.Find("Manager").GetComponent<ModelManager>().showMyModel();
         }
 
         //Update level restrictions
@@ -64,8 +65,8 @@ public class GeneralManager : MonoBehaviour
             .GetComponent<ShopScript>().removeLevelRestrictions();
 
         //Update server data - totalXP, level
-        //ServerService.updateLevel();
-        //ServerService.updateTotalXP();
+        ServerService.updateLevel();
+        ServerService.updateTotalXP();
 
     }
     public static GameObject FindInActiveObjectByName(string name)
