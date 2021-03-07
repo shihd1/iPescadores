@@ -8,9 +8,9 @@ public class CameraHandler : MonoBehaviour
     private static readonly float ZoomSpeedTouch = 0.1f;
     private static readonly float ZoomSpeedMouse = 20f;
 
-    private static readonly float[] BoundsX = new float[] { -10f, 30f };
-    private static readonly float[] BoundsZ = new float[] { -18f, 20f };
-    private static readonly float[] ZoomBounds = new float[] { 20f, 50f };
+    public float[] BoundsX = new float[] { -15f, 20f };
+    public float[] BoundsZ = new float[] { -15f, 20f };
+    public float[] ZoomBounds = new float[] { 20f, 50f };
 
     private Camera cam;
 
@@ -111,7 +111,7 @@ public class CameraHandler : MonoBehaviour
         Vector3 move = new Vector3(offset.x * PanSpeed, 0, offset.y * PanSpeed);
 
         // Perform the movement
-        transform.Translate(-move, Space.World);
+        transform.Translate(move, Space.World);
 
         // Ensure the camera remains within bounds.
         Vector3 pos = transform.position;
