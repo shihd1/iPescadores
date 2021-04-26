@@ -11,9 +11,9 @@ const uri = "mongodb://localhost:27017/";
 const client = new MongoClient(uri);
 
 //router
-//app.use(express.static('public'));
-//app.set('view engine', 'ejs');
-//app.use('/upload', router);
+app.use(express.static('public'));
+app.set('view engine', 'ejs');
+app.use('/upload', router);
 
 async function run() {
     try {

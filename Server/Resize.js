@@ -15,6 +15,7 @@ class Resize {
                 fit: sharp.fit.inside,
                 withoutEnlargement: true
             })
+            .removeAlpha()
             .toFile(filepath);
 
         return filename;
