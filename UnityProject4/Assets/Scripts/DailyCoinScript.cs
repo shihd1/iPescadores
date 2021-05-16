@@ -18,7 +18,7 @@ public class DailyCoinScript : MonoBehaviour
         if (currentDate == "" || !currentDate.Equals(System.DateTime.Now.ToString("yyyy-MM-dd")))
         {
             //Show panel to collect coin
-            GeneralManager.FindInActiveObjectByName("Coin Canvas").SetActive(true);
+            //GeneralManager.FindInActiveObjectByName("Coin Canvas").SetActive(true);
         }
     }
     public void setDate()

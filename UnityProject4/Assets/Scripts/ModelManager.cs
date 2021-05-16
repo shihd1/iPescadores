@@ -22,6 +22,11 @@ public class ModelManager : MonoBehaviour
         int level = GameObject.Find("Local Data").GetComponent<Data>().level;
         GameObject.Find("Manager").GetComponent<FriendManager>().showFriend(level, new Vector3(0, 0, 0));
     }
+    public void removePrevModel()
+    {
+        int level = GameObject.Find("Local Data").GetComponent<Data>().level - 1;
+        GameObject.Find("Level " + level+ "(Clone)").gameObject.SetActive(false);
+    }
     public void showModel(int index)
     {
         int i = 0;
@@ -30,6 +35,19 @@ public class ModelManager : MonoBehaviour
             i++;
         }
         models[index].list[i].gameObject.SetActive(true);
+    }
+    public void showAllMyModels()
+    {
+        for(int i = 0; i < GameObject.Find("Local Data").GetComponent<Data>().numLife.Length; i++)
+        {
+            if(GameObject.Find("Local Data").GetComponent<Data>().numLife[i] > 0)
+            {
+                for (int j = 0; j < GameObject.Find("Local Data").GetComponent<Data>().numLife[i]; j++)
+                {
+                    models[i].list[j].gameObject.SetActive(true);
+                }
+            }
+        }
     }
 }
 [System.Serializable]

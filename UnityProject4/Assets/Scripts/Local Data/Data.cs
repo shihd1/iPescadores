@@ -20,14 +20,26 @@ public class Data : MonoBehaviour
     //Friend request info
     public string[] friendRequestID;
 
+    //PlayerPrefs
+    public float sensitivity = 0.5f;
+    public string language = "English";
+
+
     void Start()
     {
         //SaveData.current.profile = new PlayerProfile();
         //SerializationManager.Save("playerProgress", SaveData.current.profile);
         //SaveData.current.profile = (PlayerProfile)SerializationManager.Load(Application.persistentDataPath + "/saves/" + "playerProgress" + ".save");
         //Debug.Log(Application.persistentDataPath+"/saves/");
-        
+
         //cost = new int[10] { };
+        if (PlayerPrefs.GetFloat("Sensitivity") != 0f)
+            sensitivity = PlayerPrefs.GetFloat("Sensitivity");
+        if (PlayerPrefs.GetString("Language") != "")
+            language = PlayerPrefs.GetString("Language");
+        if (PlayerPrefs.GetFloat("MusicVolume") != 0f)
+            GameObject.Find("Background Music").GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume");
+
     }
     public void analyzeData()
     {

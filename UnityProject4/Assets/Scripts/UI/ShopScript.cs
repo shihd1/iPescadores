@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopScript : MonoBehaviour
 {
@@ -24,9 +25,20 @@ public class ShopScript : MonoBehaviour
         Debug.Log(this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         int costI = objectCost[index];
         Debug.Log("Buy item " + index + " costing "+costI);
-        //GameObject.Find("Local Data").GetComponent<Data>().addCoins(-costI);
-
-        GameObject.Find("Manager").GetComponent<ModelManager>().showModel(index);
+        if(GameObject.Find("Local Data").GetComponent<Data>().coins >= costI)
+        {
+            GameObject.Find("Local Data").GetComponent<Data>().addCoins(-costI);
+            GameObject.Find("Manager").GetComponent<ModelManager>().showModel(index);
+            GameObject.Find("Local Data").GetComponent<Data>().numLife[index]++;
+            ServerService.updateNumLife(index, GameObject.Find("Local Data").GetComponent<Data>().numLife[index]);
+        }
+        else
+        {
+            GeneralManager.FindInActiveObjectByName("Popup Tab").transform.Find("Display Info").transform.Find("Text").GetComponent<Text>().text = "Not Enough Money";
+            GeneralManager.FindInActiveObjectByName("Popup Tab").transform.Find("Display Info").transform.Find("MoveOn").gameObject.SetActive(false);
+            GeneralManager.FindInActiveObjectByName("Popup Tab").transform.Find("Display Info").transform.Find("Redo").gameObject.SetActive(true);
+            GeneralManager.FindInActiveObjectByName("Popup Tab").gameObject.SetActive(true);
+        }
     }
     public void removeLevelRestrictions()
     {

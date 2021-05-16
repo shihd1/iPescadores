@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
 
 public class ServerService : MonoBehaviour
 {
-    private static string appserver = "http://122.118.4.61:3000";
+    public static string appserver = "http://114.35.46.192:3000";
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +74,7 @@ public class ServerService : MonoBehaviour
             return "ERROR";
         }
     }
-    public static bool signIn(string username, string password)
+    public static int signIn(string username, string password)
     {
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         var cryptoMD5 = System.Security.Cryptography.MD5.Create();
@@ -81,7 +82,15 @@ public class ServerService : MonoBehaviour
         var hash = cryptoMD5.ComputeHash(bytes);
         string encryptedPassword = BitConverter.ToString(hash).Replace("-", string.Empty);
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver+"/signin/" + username + "/" + encryptedPassword);
-        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        HttpWebResponse response = null;
+        try
+        {
+            response = (HttpWebResponse)request.GetResponse();
+        }
+        catch(Exception)
+        {
+            return 2;
+        }
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
         Debug.Log(jsonResponse);
@@ -96,7 +105,12 @@ public class ServerService : MonoBehaviour
             GameObject.Find("Local Data").GetComponent<Data>().friendRequestID = o.friendRequest;
             GameObject.Find("Local Data").GetComponent<Data>().achievementStatus = o.achievementStatus;
             GameObject.Find("Local Data").GetComponent<Data>().numLife = o.numLife;
+            if(GameObject.Find("Local Data").GetComponent<Data>().numLife.Length == 0)
+            {
+                GameObject.Find("Local Data").GetComponent<Data>().numLife = new int[20];
+            }
             GameObject.Find("Manager").GetComponent<ModelManager>().showMyModel();
+            GameObject.Find("Manager").GetComponent<ModelManager>().showAllMyModels();
             GameObject.Find("Manager").GetComponent<FriendManager>().showAllFriends();
             GameObject.Find("Canvas")
                 .transform.Find("Friend Requests")
@@ -110,12 +124,15 @@ public class ServerService : MonoBehaviour
                 .transform.Find("Horizontal Panel")
                 .transform.Find("Text (TMP)")
                 .GetComponent<CoinPanel>().updateCoinCount();
-            
-            return true;
+            GameObject.Find("Canvas")
+                .transform.Find("Shop")
+                .GetComponent<ShopScript>().removeLevelRestrictions();
+
+            return 0;
         }
         else
         {
-            return false;
+            return 1;
         }
     }
     public static int getLevel(string id)
@@ -191,6 +208,17 @@ public class ServerService : MonoBehaviour
         Debug.Log(jsonResponse);
         Output info = JsonUtility.FromJson<Output>(jsonResponse);
         return info.coins;
+    }
+    public static int getPoints(string id)
+    {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver + "/getPoints/" + id);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
+        return info.points;
     }
     public static bool addFriend(string id, string friendID)
     {
@@ -301,6 +329,18 @@ public class ServerService : MonoBehaviour
         Output info = JsonUtility.FromJson<Output>(jsonResponse);
         return info.status.Equals("success");
     }
+    public static bool erasePoints()
+    {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        string id = GameObject.Find("Local Data").GetComponent<Data>().id;
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(appserver + "/updatePoints/" + id + "/" + 0);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        Debug.Log(jsonResponse);
+        Output info = JsonUtility.FromJson<Output>(jsonResponse);
+        return info.status.Equals("success");
+    }
 }
 
 [System.Serializable]
@@ -314,6 +354,7 @@ public class Output
     public int coins;
     public bool exist;
     public int level;
+    public int points;
 
     public string[] friendRequest;
     public string[] friendList;

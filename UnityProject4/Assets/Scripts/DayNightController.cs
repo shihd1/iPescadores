@@ -6,6 +6,9 @@ public class DayNightController : MonoBehaviour
 {
     int skysI;
     public Material[] skys;
+    public Light lightMorning;
+    public Light lightNight;
+    public GameObject lighthouse;
 
     // Start is called before the first frame update
     void Start()
@@ -29,13 +32,20 @@ public class DayNightController : MonoBehaviour
         Debug.Log("Switch");
         if(skysI == 0)
         {
+            lighthouse.gameObject.SetActive(true);
+            lightMorning.gameObject.SetActive(false);
+            lightNight.gameObject.SetActive(true);
             RenderSettings.skybox = skys[1];
             skysI = 1;
         }
         else if(skysI == 1)
         {
+            lighthouse.gameObject.SetActive(false);
+            lightNight.gameObject.SetActive(false);
+            lightMorning.gameObject.SetActive(true);
             RenderSettings.skybox = skys[0];
             skysI = 0;
         }
+        DynamicGI.UpdateEnvironment();
     }
 }

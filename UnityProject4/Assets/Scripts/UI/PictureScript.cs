@@ -92,10 +92,11 @@ public class PictureScript : MonoBehaviour
         // Create a Web Form
         WWWForm form = new WWWForm();
         form.AddField("frameCount", Time.frameCount.ToString());
-        form.AddBinaryData("image", bytes, "screenShot.png", "image/png");
+        form.AddBinaryData("image", bytes, GameObject.Find("Local Data").GetComponent<Data>().id+".png", "image/png");
 
         // Upload to a cgi script
-        using (var w = UnityWebRequest.Post("http://localhost:3000/upload/post", form))
+        Debug.Log("Upload to a cgi script");
+        using (var w = UnityWebRequest.Post(ServerService.appserver + "/upload/post", form))
         {
             yield return w.SendWebRequest();
             Debug.Log("-----------------------------");
@@ -105,7 +106,7 @@ public class PictureScript : MonoBehaviour
             }
             else
             {
-                print("Finished Uploading Screenshot");
+                Debug.Log("Finished Uploading Screenshot");
             }
         }
         

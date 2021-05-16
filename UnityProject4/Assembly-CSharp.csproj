@@ -63,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AchievementManager.cs" />
     <Compile Include="Assets\Asset Store\LowPolyWater_Pack\Scripts\LowPolyWater.cs" />
     <Compile Include="Assets\Asset Store\PolygonObjects\Polygonal Foliage Asset Package\Scripts\Utility\FlyCameraBehaviour.cs" />
     <Compile Include="Assets\Asset Store\UITween\Prefabs\Click Effect Pref\ClickedWaveAnimation.cs" />
@@ -73,9 +72,17 @@
     <Compile Include="Assets\Asset Store\UITween\Scripts\EasyTween.cs" />
     <Compile Include="Assets\Asset Store\UITween\Scripts\ReferencedFrom.cs" />
     <Compile Include="Assets\Asset Store\UITween\Scripts\UITween.cs" />
-    <Compile Include="Assets\BackSideMesh.cs" />
+    <Compile Include="Assets\PathCreator\Examples\Scripts\GeneratePathExample.cs" />
+    <Compile Include="Assets\PathCreator\Examples\Scripts\PathFollower.cs" />
+    <Compile Include="Assets\PathCreator\Examples\Scripts\PathPlacer.cs" />
+    <Compile Include="Assets\PathCreator\Examples\Scripts\PathSceneTool.cs" />
+    <Compile Include="Assets\PathCreator\Examples\Scripts\PathSpawner.cs" />
+    <Compile Include="Assets\PathCreator\Examples\Scripts\RoadMeshCreator.cs" />
+    <Compile Include="Assets\Scripts\AchievementManager.cs" />
+    <Compile Include="Assets\Scripts\BackSideMesh.cs" />
     <Compile Include="Assets\Scripts\CameraHandler.cs" />
     <Compile Include="Assets\Scripts\CameraRotator.cs" />
+    <Compile Include="Assets\Scripts\CartHandler.cs" />
     <Compile Include="Assets\Scripts\DailyCoinScript.cs" />
     <Compile Include="Assets\Scripts\DayNightController.cs" />
     <Compile Include="Assets\Scripts\DeviceCameraHandler.cs" />
@@ -99,6 +106,8 @@
     <Compile Include="Assets\Scripts\UI\ShopScript.cs" />
     <Compile Include="Assets\Scripts\UI\SignIn.cs" />
     <Compile Include="Assets\Scripts\UI\SwipeMenu.cs" />
+    <Compile Include="Assets\Scripts\Underwater.cs" />
+    <Compile Include="Assets\Scripts\bgscript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -132,7 +141,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
-    <Compile Include="Assets\Underwater.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
@@ -147,6 +155,7 @@
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\Asset Store\LowPolyFantasyClouds\Shaders\CloudsShader.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
@@ -742,7 +751,16 @@
       <HintPath>C:/Users/user/Documents/GitHub/Projects/iPescadores/UnityProject4/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="PathCreator.csproj">
+      <Project>{5EDC22C5-9457-FADA-8BBC-BB51296E3D5F}</Project>
+      <Name>PathCreator</Name>
+    </ProjectReference>
+    <ProjectReference Include="PathCreatorEditor.csproj">
+      <Project>{6281C81E-69DC-EDED-D96E-74780D94F464}</Project>
+      <Name>PathCreatorEditor</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
