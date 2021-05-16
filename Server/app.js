@@ -112,6 +112,7 @@ async function addUser(id, username, firstname, lastname, password) {
             id: id,
             level: 1,
             coins: 0,
+            points: 0,
             totalXP: 0,
             friendList: [],
             friendRequest: [],
@@ -249,6 +250,25 @@ async function updateCoins(userID, newCoins) {
         const updateDoc = {
             $set: {
                 coins: parseInt(newCoins)
+            }
+        };
+        var result = await collection.updateOne(filter, updateDoc, options);
+        end = result.modifiedCount == 1;
+    } finally {
+        return end;
+    }
+}
+async function updatePoints(userID, newPoints) {
+    try {
+        await client.connect();
+
+        const database = client.db("PenghuProject");
+        const collection = database.collection("UserInfo");
+        const filter = { id: parseInt(userID) };
+        const options = { upsert: false };
+        const updateDoc = {
+            $set: {
+                points: parseInt(newPoints)
             }
         };
         var result = await collection.updateOne(filter, updateDoc, options);
@@ -401,6 +421,24 @@ app.get('/getCoins/:id', (req, res) => {
             if (r != null) {
                 //console.log("------------------------------A");
                 res.send({ 'status': 'success', coins: r.coins });
+            } else {
+                //console.log("------------------------------B");
+                res.send({ 'status': 'fail' });
+            }
+        })
+        .catch(() => {
+            //console.log("------------------------------C");
+            res.send({ 'status': 'fail' });
+        });
+});
+app.get('/getPoints/:id', (req, res) => {
+    var id = req.params.id;
+    getPerson(id)
+        .then((r) => {
+            //console.log("------------------------------")
+            if (r != null) {
+                //console.log("------------------------------A");
+                res.send({ 'status': 'success', points: r.points });
             } else {
                 //console.log("------------------------------B");
                 res.send({ 'status': 'fail' });
@@ -596,6 +634,21 @@ app.get('/updateNumLife/:userID/:index/:newLife', (req, res) => {
     var index = req.params.index;
     var newLife = req.params.newLife;
     updateNumLife(userID, index, newLife)
+        .then((r) => {
+            if (r == true) {
+                res.send({ 'status': 'success' });
+            } else {
+                res.send({ 'status': 'fail' });
+            }
+        })
+        .catch(() => {
+            res.send({ 'status': 'fail' });
+        })
+});
+app.get('/updatePoints/:userID/:newPoints', (req, res) => {
+    var userID = req.params.userID;
+    var newPoints = req.params.newPoints;
+    updatePoints(userID, newPoints)
         .then((r) => {
             if (r == true) {
                 res.send({ 'status': 'success' });

@@ -11,7 +11,7 @@ public class GeneralManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("checkServerPoints", 5, 10);
+
     }
 
     // Update is called once per frame
@@ -126,6 +126,10 @@ public class GeneralManager : MonoBehaviour
         PlayerPrefs.SetFloat("Sensitivity", GameObject.Find("Local Data").GetComponent<Data>().sensitivity);
         PlayerPrefs.SetString("Language", GameObject.Find("Local Data").GetComponent<Data>().language);
         PlayerPrefs.SetFloat("MusicVolume",GameObject.Find("Background Music").GetComponent<AudioSource>().volume);
+    }
+    public void startChecking()
+    {
+        InvokeRepeating("checkServerPoints", 5, 10);
     }
     public void checkServerPoints()
     {

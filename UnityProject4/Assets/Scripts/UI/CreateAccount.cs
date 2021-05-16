@@ -49,6 +49,7 @@ public class CreateAccount : MonoBehaviour
                 if (!val.Equals("ERROR"))
                 {
                     info.text = "Account Created!";
+                    ServerService.signIn(username.text, password.text);
                     canMoveOn(true);
                 }
                 else

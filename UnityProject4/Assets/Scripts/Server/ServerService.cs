@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class ServerService : MonoBehaviour
 {
-    public static string appserver = "http://114.35.46.192:3000";
+    //public static string appserver = "http://114.35.46.192:3000";
+    public static string appserver = "http://localhost:3000";
 
     // Start is called before the first frame update
     void Start()
@@ -112,6 +113,7 @@ public class ServerService : MonoBehaviour
             GameObject.Find("Manager").GetComponent<ModelManager>().showMyModel();
             GameObject.Find("Manager").GetComponent<ModelManager>().showAllMyModels();
             GameObject.Find("Manager").GetComponent<FriendManager>().showAllFriends();
+            GameObject.Find("Manager").GetComponent<GeneralManager>().startChecking();
             GameObject.Find("Canvas")
                 .transform.Find("Friend Requests")
                 .transform.Find("Scroll View")
