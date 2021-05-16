@@ -27,7 +27,7 @@ public class ButtonConfirmFriendRequest : MonoBehaviour
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + " " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         GameObject.Find("Manager").GetComponent<FriendManager>().confirmFriendRequest(id);
         transform.parent.gameObject.SetActive(false);
-        Transform infoCanvas = GameObject.Find("Canvas").transform.Find("Account - Yes or No");
+        Transform infoCanvas = GameObject.Find("Canvas").transform.Find("Popup Tab");
         infoCanvas.transform.Find("Display Info").Find("Text").GetComponent<Text>().text = "Confirmed!";
         infoCanvas.transform.Find("Display Info").Find("MoveOn").gameObject.SetActive(true);
         infoCanvas.transform.Find("Display Info").Find("Redo").gameObject.SetActive(false);

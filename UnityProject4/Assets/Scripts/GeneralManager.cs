@@ -129,7 +129,7 @@ public class GeneralManager : MonoBehaviour
     }
     public void startChecking()
     {
-        InvokeRepeating("checkServerPoints", 5, 10);
+        InvokeRepeating("checkServerPoints", 3, 60);
     }
     public void checkServerPoints()
     {

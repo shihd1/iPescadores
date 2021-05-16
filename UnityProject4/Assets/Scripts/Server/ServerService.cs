@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class ServerService : MonoBehaviour
 {
-    //public static string appserver = "http://114.35.46.192:3000";
-    public static string appserver = "http://localhost:3000";
+    public static string appserver = "http://114.35.46.192:3000";
+    //public static string appserver = "http://localhost:3000";
 
     // Start is called before the first frame update
     void Start()

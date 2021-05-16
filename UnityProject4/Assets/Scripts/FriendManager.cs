@@ -122,7 +122,7 @@ public class FriendManager : MonoBehaviour
         Debug.Log(this.ToString()+" "+System.Reflection.MethodBase.GetCurrentMethod().Name);
         string id = localData.GetComponent<Data>().id;
         string friendID = ServerService.getID(username.text);
-        Transform Panel = GameObject.Find("Canvas").transform.Find("Account - Yes or No");
+        Transform Panel = GameObject.Find("Canvas").transform.Find("Popup Tab");
         Text t = Panel.transform.Find("Display Info").transform.Find("Text").gameObject.GetComponent<Text>();
         if (friendID==null)
         {
