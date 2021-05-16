@@ -6,8 +6,8 @@ class Resize {
     constructor(folder) {
         this.folder = folder;
     }
-    async save(buffer) {
-        const filename = Resize.filename();
+    async save(buffer,fname) {
+        const filename = fname.split('.')[0]+"_"+Resize.filename();
         const filepath = this.filepath(filename);
 
         await sharp(buffer)
