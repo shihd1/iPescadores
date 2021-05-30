@@ -14,16 +14,18 @@ It realized the interactive communication between users’ device and server.
 The NOSQL Database (MongoDB) has flexible schema and document based structure making it easy to organize the data and handle schema changes in requirements. 
 I choose MongoDB as my database.
 
-### Display
-Before uploading the photo:
-![alt text](https://github.com/shihd1/iPescadores/blob/master/ImageFolder/HexagonBefore.PNG?raw=true)
+### Slideshow
+![alt text](https://github.com/shihd1/iPescadores/blob/master/ImageFolder/Capstone%20Project%20-%20Penghu.jpg?raw=true)
+![alt text](https://github.com/shihd1/iPescadores/blob/master/ImageFolder/Capstone%20Project%20-%20Penghu%20(1).jpg?raw=true)
+![alt text](https://github.com/shihd1/iPescadores/blob/master/ImageFolder/Capstone%20Project%20-%20Penghu%20(2).jpg?raw=true)
+![alt text](https://github.com/shihd1/iPescadores/blob/master/ImageFolder/Capstone%20Project%20-%20Penghu%20(3).jpg?raw=true)
 
-After uploading the photo:
-![alt text](https://github.com/shihd1/iPescadores/blob/master/ImageFolder/HexagonAfter.PNG?raw=true)
-
-### Aspirations/Vision
-Use of state-of-art technique: Mask-RCNN
-
-New research on creating planes from a single image: https://single-view-mpi.github.io/ 
-
-I plan to try a combination of Mask R-CNN (which would recognize trash and apply masks) and multiplane images (to predict the depth) to create a rough estimate on the amount of trash.
+### Future Work
+- Find out the true scaling factor
+- Apply statistical methods to analyze the margin of error of the approach
+- Optimize AI program parameters
+- Plot values onto map
+- Playtesting
+- Optimize user movement within the game
+- Expand upon the collectibles
+- Promotion
